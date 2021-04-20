@@ -28,8 +28,14 @@ try:
     print(f'Copying file {tmpfile_path} {file_path}')
 
     shutil.copy(tmpfile_path, file_path)
+except requests.exceptions.ConnectionError:
+    print(f'Error downloading the file. The URL {url} is incorrect')
+except FileNotFoundError:
+    print(f'File cannot be found: {tmpfile_path}')
+except PermissionError:
+    print(f'Problem accessing the file: {file_path}')
 except Exception as e:
-    print(f'Error downloading URL {url}')
+    print(f'An error occured')
     print(f'Error details: {e}')
 else:
     print(f'URL Downloaded successfully {file}')
